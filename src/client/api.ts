@@ -35,6 +35,11 @@ export async function deleteLoss(code: string, lossId: string): Promise<void> {
   catch { demoDeleteLoss(code, lossId); }
 }
 
+export async function updateLoss(code: string, lossId: string, input: { loserId: string; amount: number; playedAt: string; memo: string }): Promise<void> {
+  try { await request(`/api/rooms/${code}/losses/${lossId}`, { method: "PATCH", body: JSON.stringify(input) }); }
+  catch { demoUpdateLoss(code, lossId, input); }
+}
+
 export async function completeSettlement(code: string, month: string): Promise<void> {
   try { await request(`/api/rooms/${code}/settlements/${month}/complete`, { method: "POST" }); }
   catch { demoSettle(code, month, "PAID"); }
@@ -67,4 +72,5 @@ function demoDashboard(code: string, month: string): Dashboard {
 }
 function demoAddLoss(code: string, input: { loserId: string; amount: number; playedAt: string; memo: string }): { id: string } { const state = readDemo(); if (!state) throw new Error("데모 방을 먼저 만들어 주세요."); const record = { id: crypto.randomUUID(), loser_id: input.loserId, amount: input.amount, played_at: input.playedAt, memo: input.memo }; state.losses.unshift(record); writeDemo(state); return { id: record.id }; }
 function demoDeleteLoss(_code: string, lossId: string): void { const state = readDemo(); if (state) { state.losses = state.losses.filter((loss) => loss.id !== lossId); writeDemo(state); } }
+function demoUpdateLoss(_code: string, lossId: string, input: { loserId: string; amount: number; playedAt: string; memo: string }): void { const state = readDemo(); const loss = state?.losses.find((item) => item.id === lossId); if (state && loss) { loss.loser_id = input.loserId; loss.amount = input.amount; loss.played_at = input.playedAt; loss.memo = input.memo; writeDemo(state); } }
 function demoSettle(_code: string, month: string, status: "PAID" | "OPEN"): void { const state = readDemo(); if (state) { state.settled[month] = status === "PAID"; writeDemo(state); } }
