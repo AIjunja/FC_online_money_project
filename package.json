@@ -1,0 +1,41 @@
+{
+  "name": "fc-paejae-jeogeumso",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:worker": "wrangler dev --local",
+    "build": "tsc -b && vite build",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "eslint . --ext .ts,.tsx",
+    "db:migrate:local": "wrangler d1 migrations apply fc-paejae-jeogeumso --local",
+    "db:seed": "wrangler d1 execute fc-paejae-jeogeumso --local --file=./migrations/seed.sql",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hono/zod-validator": "^0.4.3",
+    "@vitejs/plugin-react": "^4.4.1",
+    "hono": "^4.7.7",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20260714.1",
+    "@eslint/js": "^9.30.1",
+    "@types/node": "^22.15.30",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "eslint": "^9.30.1",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.2.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.35.1",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.4",
+    "wrangler": "^4.22.0"
+  }
+}

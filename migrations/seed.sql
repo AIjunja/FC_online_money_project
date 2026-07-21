@@ -1,0 +1,3 @@
+INSERT OR IGNORE INTO rooms (id, code, name, owner_member_id, created_at) VALUES ('demo-room', 'DEMO24', '우리들의 FC 리그', 'demo-a', '2026-07-01T00:00:00.000Z');
+INSERT OR IGNORE INTO members (id, room_id, name, role, created_at) VALUES ('demo-a', 'demo-room', '민수', 'OWNER', '2026-07-01T00:00:00.000Z'), ('demo-b', 'demo-room', '지훈', 'MEMBER', '2026-07-01T00:00:00.000Z');
+INSERT OR IGNORE INTO loss_records (id, room_id, loser_id, amount, played_at, memo, created_by, created_at, updated_at) VALUES ('demo-loss-1', 'demo-room', 'demo-a', 1000, '2026-07-08', '랭겜 1차', 'demo-a', '2026-07-08T12:00:00.000Z', '2026-07-08T12:00:00.000Z'), ('demo-loss-2', 'demo-room', 'demo-b', 1000, '2026-07-10', '복수전 실패', 'demo-b', '2026-07-10T12:00:00.000Z', '2026-07-10T12:00:00.000Z');
